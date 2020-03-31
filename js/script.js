@@ -37,3 +37,7 @@ do {
   console.log(1);
   index += 1;
 } while (index < 3);
+
+for (let number = 0; number < 12; number += 2) {
+  console.log(number);
+}
