@@ -229,58 +229,172 @@
 // console.log(day1.wolf);
 
 // !Объект со свойствами с пробелами
-let description = {
-  work: "Пошел на работу",
-  "трогал дерево": "Потрогал дерево",
-  age: 21
-};
+// let description = {
+//   work: "Пошел на работу",
+//   "трогал дерево": "Потрогал дерево",
+//   age: 21
+// };
 // !удаление свойств
-delete description.work
-console.log(description);
+// delete description.work
+// console.log(description);
 // !проверка на содержание свойства в объекте 
-console.log("трогал дерево" in description);
+// console.log("трогал дерево" in description);
 // !вызов свойств объекта
-console.log(Object.keys({work: "Пошел на работу","трогал дерево": "Потрогал дерево",age: 21}));
+// console.log(Object.keys({work: "Пошел на работу","трогал дерево": "Потрогал дерево",age: 21}));
 //!копирование объектов с изменением его свойств(т.о. массив частный случай объекта для хранения последовательностей)
-Object.assign(description,{b:3, work:"не пошел"});
-console.log(description);
+// Object.assign(description,{b:3, work:"не пошел"});
+// console.log(description);
 
 //!к вопросу об изменяемости объектов, переменные 1 и 2 имеют одинаковую идентичность
-let object1 = {value: 10};
-let object2 = object1;
-let object3 = {value: 10};
-console.log(object1 == object2);
-console.log(object1 == object3);
+// let object1 = {value: 10};
+// let object2 = object1;
+// let object3 = {value: 10};
+// console.log(object1 == object2);
+// console.log(object1 == object3);
 //!изменение свойств объекта
-object1.value = 15
-console.log(object1.value);
+// object1.value = 15
+// console.log(object1.value);
 
 //!Журнал Жака, добавление записей
-let journal =[
-  {events:["ел мюсли","работал","трогал дерево","ел пиццу"],
-  squirrel: false},
-  {events:["ел орехи","работал","трогал дерево","читсил зубы"],
-  squirrel: false},
-  {events:["ел орехи","работал","трогал дерево","ел пиццу"],
-  squirrel: true},
-  {events:["ел орехи","работал","трогал дерево","ел пиццу"],
-  squirrel: true}
-];
+// let journal =[
+//   {events:["ел мюсли","работал","трогал дерево","ел пиццу"],
+//   squirrel: false},
+//   {events:["ел орехи","работал","трогал дерево","чистил зубы"],
+//   squirrel: false},
+//   {events:["ел орехи","работал","трогал дерево","ел пиццу"],
+//   squirrel: true},
+//   {events:["ел орехи","работал","трогал дерево","ел пиццу"],
+//   squirrel: true}
+// ];
 //!т.о. можно явно не задавая как называются свойства, функция будет брать их из имени переменной
-function addEntry(events,squirrel){
-  journal.push({events,squirrel});
-};
-addEntry(["работал","трогал дерево","ел пиццу"],false);
-console.log(journal);
+// function addEntry(events,squirrel){
+//   journal.push({events,squirrel});
+// };
+// addEntry(["трогал дерево","ел пиццу"],false);
+// console.log(journal);
 
 //!Функция для вычисления коррекляции
-function phi(table){
-  return(table[3]*table[0]-table[2]*table[1])/Math.sqrt((table[2]+table[3])*(table[0]+table[1])*(table[1]+table[3])*(table[0]+table[2]));
-};
-console.log(phi([76,9,4,1]));
+// function phi(table){
+//   return(table[3]*table[0]-table[2]*table[1])/Math.sqrt((table[2]+table[3])*(table[0]+table[1])*(table[1]+table[3])*(table[0]+table[2]));
+// };
+// console.log(phi([76,9,4,1]));
 
-//!Функция для подсчета количества событий по отоношению к превращению в белку
-function tableFor(event,journal){
-  let table = [0,0,0,0];
+//!Функция для подсчета количества событий по отоношению к превращению в белку(include - проверяет сущестует ли в массиве заданное значение)
+// function tableFor(event,journal){
+//   let table = [0,0,0,0];
+//   for (let i = 0; i < journal.length; i++) {
+//     let entry = journal[i], index = 0;
+//     if (entry.events.includes(event)) index += 1;
+//     if (entry.squirrel) index += 2;
+//     table[index] += 1;
+//   }
+//   return table;0
+// };
 
-}
+// console.log(tableFor("ел орехи",journal))
+// console.log(phi(tableFor("ел орехи",journal)));
+
+//!Перебор массива в цикле более изящным способом
+// for (let entry of journal) {
+//   console.log(`${entry.events.length} событий.`);
+// };
+
+//! найдем все типы событий
+// function journalEvents(journal){
+//   let events = [];
+//   for (let entry of journal){
+//     for (let event of entry.events) {
+//       if (!events.includes(event)){
+//         events.push(event);
+//       };
+//     };
+//   };
+//   return events;
+// };
+
+//! Все возможные события
+// console.log(journalEvents(journal));
+
+//!расчитаем корреляцию для каждого из возможных событий
+// for (let event of journalEvents(journal)){
+//   console.log(event + ":", phi(tableFor(event, journal)));
+// }
+
+//!Выведем наиболее значимые корреляции
+// for (let event of journalEvents(journal)){
+//   let corelation = phi(tableFor(event,journal));
+//   if (corelation > 0.1 || corelation < -0.1){
+//     console.log(event + ":", corelation);
+//   };
+// };
+//!Добавим к событиям в которых жак ел орехи и не чистил зубы
+// for (let entry of journal){
+//   if (entry.events.includes("ел орехи") && !entry.events.includes("чистил зубы")){
+//     entry.events.push("арахис-зубы");
+//   };
+// };
+//!убедимся что кореляция для таких событий равна 1
+// console.log(phi(tableFor("арахис-зубы",journal)));
+
+//*Работа с методами и свойствами массивами
+//!unshift и shift добавление элемента и его удаление с начала списка
+// let todoList = ["Съесть роллов", "Съесть пиццы", "Пропылесосить", "Вытереть пыль", "Сделать пык-пык"];
+// function remember(task){
+//   todoList.push(task);
+// };
+// function getTask(){
+//   return todoList.shift();
+// };
+// function rememberUrgently(task){
+//   todoList.unshift(task);
+// };
+// remember("покормить хомяка");
+// getTask();
+// rememberUrgently("поспать");
+// console.log(todoList);
+
+//!Поиск индекса по значению с начала и с конца, можно задать необязательный второй аргумент, который указывает с какого элемента начать
+// console.log([1,2,3,4,1,2,3,4].indexOf(2,3));
+// console.log([1,2,3,4,1,2,3,4].lastIndexOf(2));
+
+//!Срезы массивов slice, если не писать аргументы, то можно получить копию(я так понял, что независящую)
+// console.log([1,2,3,4,1,2,3,4].slice(2,4));
+// console.log([1,2,3,4,1,2,3,4].slice(2));
+// console.log([1,2,3,4,1,2,3,4].slice());
+
+//! Склеивание массивов concat, функция удаляет значение по индексу из массива
+// function remove(array, index){
+//   return array.slice(0,index).concat(array.slice(index+1))
+// }
+// console.log(remove([1,2,3,4,5,6]),2);
+
+//!Строки и их свойства, добавить новые свойства не получится,так как они неявляются объектами; к ним можно применить методы slice, indexOf, trim, padStart, split, join, repeat, length
+// let kim = "Ким";
+// kim.age = 88;
+// console.log(kim.age);
+// console.log("кокосы".slice(3,6));
+// console.log("кокос".indexOf("ос"));
+// console.log("   jer    \n".trim());
+// console.log(String(6).padStart(6, "0"));
+// console.log("Птицы-секретари умеют громко топать".split(" "));
+// console.log("Птицы-секретари умеют громко топать".split(" ").join(". "));
+// console.log("ЛА".repeat(3));
+
+//!Дополнительные параметры, т.е. можно задать для функции бесконечно много параметров. Развертка массива внутри функции
+// function max(...numbers){
+//   let result = -Infinity;
+//   for (let number of numbers){
+//     if (number > result) result = number;
+//   }
+//   return result;
+// }
+// let numbers = [4,12,432,432,-23];
+// console.log(max(23,...numbers,4323))
+let words = ["плюшка","и"];
+console.log(["Ксюша",...words,"киска","одновременно"].join(" "))
+
+//!Объект Math - пространство имен
+console.log(Math.random());
+
+
+
