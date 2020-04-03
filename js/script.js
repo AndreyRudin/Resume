@@ -115,7 +115,7 @@
 
 // console.log(power(10,4));
 
-// Упражнения функции минимум
+//! Упражнения 2.2 функции минимум(работает)
 // const min = function(a,b){
 //   result = a;
 //   if (b < a){
@@ -139,7 +139,7 @@
 // };
 // min3(1,2);
 
-// Количество букв в слове
+//! Упражнение 2.1 Количество букв в слове(работает)
 // function findNumberSymbolsInWord(word, symbol="В") {
 //   let count = 0;
 //   for (let i = 0; i <= word.length-1; i++) {
@@ -151,7 +151,7 @@
 // };
 // findNumberSymbolsInWord("ВеаСВаВааааВ", "а");
 
-// Упраженение рекурсия
+//! Упраженение 2.3 рекурсия(не решил)
 // function isEven(number){
 //   if (number == 1){
 //     console.log("нечетное");
@@ -161,13 +161,126 @@
 //   }
 // }
 
-// Описание объект
-let kiska = {
-  name: "ksusha",
-  status: ["plusha","hrusha","pushistik"],
-  age: "25",
-  "ела сегодня картошку": "нет"
-};
-kiska["Пусит Андрея"] = false;
 
-console.log(kiska["Пусит Андрея"]);
+
+//! Упражнение 3.1 Сумма последовательности
+// function range(start, end){
+//   let result = [];
+//   for (let index = start; index <= end; index++) {
+//     result.push(index)
+//   };
+//   return result;
+// };
+// function sum(...[array]){
+//   let summa = 0;
+//   for (let index = 0; index < array.length; index++) {
+//     summa += array[index]
+//   };
+//   return summa
+// };
+// console.log(sum(range(1,10)));
+
+//!Глава 4
+//!Индекс элемента
+// let listOfNumber = [1,2,3,4];
+// console.log(listOfNumber[2]);
+
+//!Смена регисра
+// let doh = "Эгегей";
+// console.log(typeof doh.toUpperCase);
+// console.log(doh.toLowerCase());
+// console.log(doh.toUpperCase());
+
+//!Добавление элемента в массив и их удаление(операции со стеком)
+// let example = [1,2,3];
+// example.push(4);
+// example.push(5);
+// console.log(example);
+// console.log(example.pop());
+// console.log(example);
+
+//! Описание объект и его свойства
+// let kiska = {
+//   name: "ksusha fedulova",
+//   status: ["plusha","hrusha","pushistik"],
+//   age: 18,
+//   "ела сегодня картошку": "нет"
+// };
+// kiska["Пусит Андрея"] = "постоянно"; //создание свойства вне описания объекта, также его можно поменять
+// kiska.status.push("4"); //добавления значения в массив данных
+// console.log(kiska.status);
+// kiska.status.pop(); //удаление последнего элемента в массиве
+// console.log(kiska.status);
+// delete kiska.age //удаление свойства
+// console.log("status" in kiska); //проверка, есть ли свойство у объекта
+// console.log(kiska["Пусит Андрея"]);
+// console.log(Object.keys({x:2,y:3})); //посмотреть значение имен свойств
+// kiska1 = Object.assign(kiska, {plusha: true}); //создает копию с новыми свойствами или изменением существующих
+// console.log(kiska1);
+
+//!Создание объекта, добавление свойств вне объекта
+// let day1 ={
+//   squirrel: false,
+//   events: ["работал","трогал дерево", "ел пиццу", "бегал"]
+// };
+// console.log(day1.squirrel);
+// console.log(day1.wolf);
+// day1.wolf = false;
+// console.log(day1.wolf);
+
+// !Объект со свойствами с пробелами
+let description = {
+  work: "Пошел на работу",
+  "трогал дерево": "Потрогал дерево",
+  age: 21
+};
+// !удаление свойств
+delete description.work
+console.log(description);
+// !проверка на содержание свойства в объекте 
+console.log("трогал дерево" in description);
+// !вызов свойств объекта
+console.log(Object.keys({work: "Пошел на работу","трогал дерево": "Потрогал дерево",age: 21}));
+//!копирование объектов с изменением его свойств(т.о. массив частный случай объекта для хранения последовательностей)
+Object.assign(description,{b:3, work:"не пошел"});
+console.log(description);
+
+//!к вопросу об изменяемости объектов, переменные 1 и 2 имеют одинаковую идентичность
+let object1 = {value: 10};
+let object2 = object1;
+let object3 = {value: 10};
+console.log(object1 == object2);
+console.log(object1 == object3);
+//!изменение свойств объекта
+object1.value = 15
+console.log(object1.value);
+
+//!Журнал Жака, добавление записей
+let journal =[
+  {events:["ел мюсли","работал","трогал дерево","ел пиццу"],
+  squirrel: false},
+  {events:["ел орехи","работал","трогал дерево","читсил зубы"],
+  squirrel: false},
+  {events:["ел орехи","работал","трогал дерево","ел пиццу"],
+  squirrel: true},
+  {events:["ел орехи","работал","трогал дерево","ел пиццу"],
+  squirrel: true}
+];
+//!т.о. можно явно не задавая как называются свойства, функция будет брать их из имени переменной
+function addEntry(events,squirrel){
+  journal.push({events,squirrel});
+};
+addEntry(["работал","трогал дерево","ел пиццу"],false);
+console.log(journal);
+
+//!Функция для вычисления коррекляции
+function phi(table){
+  return(table[3]*table[0]-table[2]*table[1])/Math.sqrt((table[2]+table[3])*(table[0]+table[1])*(table[1]+table[3])*(table[0]+table[2]));
+};
+console.log(phi([76,9,4,1]));
+
+//!Функция для подсчета количества событий по отоношению к превращению в белку
+function tableFor(event,journal){
+  let table = [0,0,0,0];
+
+}
