@@ -390,11 +390,154 @@
 // }
 // let numbers = [4,12,432,432,-23];
 // console.log(max(23,...numbers,4323))
-let words = ["плюшка","и"];
-console.log(["Ксюша",...words,"киска","одновременно"].join(" "))
+// let words = ["плюшка","и"];
+// console.log(["Ксюша",...words,"киска","одновременно"].join(" "))
 
-//!Объект Math - пространство имен
-console.log(Math.random());
+//!Объект Math - пространство имен, random создает псевдослучайное число от 0 до 1. ceil, round,abs
+// console.log(Math.floor(Math.random()*10));
+// console.log(Math.cos(2*Math.PI));
 
+//!Деструктурирование
+// function phi([n00, n01, n10, n11]){
+//   return(n11*n00-n10*n01)/Math.sqrt((n10+n11)*(n00+n01)*(n01+n11)*(n01+n10));
+// };
+// console.log(phi([12,12,2,1]));
+//!Аналогично и для объектов
+// let {name} = {name:"Фараджи", age:23};
+// console.log(name);
 
+//!JSON - формал сериализации, сериализовать данные - преобразовать их представив в иерархическом описании 
+// let object = {
+//   name:"Sonya",
+//   sename:"Rudina",
+//   "возраст девочки":23,
+//   "род занятий":["танцы","пение в душе"]
+// };
+// let JSONFormat = JSON.stringify(object)
+// console.log(JSONFormat);
+// console.log(JSON.parse(JSONFormat));
 
+//!доступ к свойствами null и underfine(не работает)
+// console.log(null.["prop"]);
+
+//!Методы - это функции относящиеся к свойствам и воздействующие на значения, свойством которого они являются
+
+//!Задание 4.2 реверс массива с созданием нового
+// function reverseArray(...[array]){
+//   newArray =[]
+//   for (let i = array.length-1; i >= 0 ; i--) {
+//     let element = array[i];
+//     newArray.push(element);
+//   };
+//   console.log(newArray);
+// };
+// reverseArray([1,2,3,4,5]);
+
+//!Задание 4.2.2 Реверс с изменением исходного массива(не работает)
+// function reverseArrayUnPlace(...[array]){
+//   for (let i = array.length-1; i >= 0; i--) {
+//     let element = array[i];
+//     array.push(element);
+//     array.shift();
+//   };
+//   console.log(array);
+// };
+// reverseArrayUnPlace([1,2,3,4,5]);
+
+//!Список иерархический набор объектов, где первый объект содержит ссылку на второй, второй на третий и т.д.
+// let list = {
+//   value: 1,
+//   rest: {
+//     value: 2,
+//     rest: {
+//       value: 3,
+//       rest: null
+//     }
+//   }
+// };
+
+//!Абстракции скрывают детали и позволяют обсуждать проблему на более высоком(абстрактном уровне)
+//!Функция ,которая вызвает какое-либо действие n раз, т.е. в качестве аргумента для функции мы можем подать функцию
+// function repeat(n, action){
+//   for (let i = 0; i < n; i++){
+//     action(i);
+//   };
+// };
+//!Можно создать функцию в качестве аргумента для другой функции прямо внутри нее
+// let labels = [];
+// repeat(3,i => {
+//   labels.push(`Блок ${i+1}`)
+// });
+// console.log(labels);
+//!Функции высшего порядка - функции котоорые работают с другими функциями или принмают функции в качестве аргуметнов 
+// function greaterThan(n){
+//   return m => m > n;
+// };
+// let greaterTnen10 = greaterThan(10);
+// console.log(greaterTnen10(11));
+//!Существуют функции, которые изменяют другие функции
+// function noisy(f){
+//   return (...args) => {
+//     console.log("вызов для", args);
+//     let result = f(...args);
+//     console.log("вызов для", args, "возвращает", result);
+//     return result;
+//   };
+// }
+// noisy(Math.min)(3,2,1);
+//!функции которые создают новые типы последовательностей
+// function unless(test,then){
+//   if (!test) then();
+// }
+// repeat(3, n => {
+//   unless(n % 2 == 1, () => {
+//     console.log(n, "- четное число");
+//   });
+// });
+//!Цикл ForEach
+// [1,2].forEach(element => {
+//   console.log(element)
+// });
+//!Работа со шрифтами
+language=[{
+  name:"Coptic",
+  ranges: [[994,1008],[11392,11508],[11513,11520]],
+  direction: "ltr",
+  year: -200,
+  living: false,
+},
+{
+  name:"Arial",
+  ranges: [[500,550],[10392,10516],[13513,16520]],
+  direction: "rtl",
+  year: 500,
+  living: true,
+},
+{
+  name:"Times New Roman",
+  ranges: [[500,550],[10392,10516],[13513,16520]],
+  direction: "ltr",
+  year: 500,
+  living: true,
+}]
+//!Функция фильтрация чистая, так как не изменяет окружение, а создает новый массив
+function filter(array,test){
+  let passed = [];
+  for (const element of array) {
+    if (test(element)){
+      passed.push(element);
+    }
+  }
+  return passed;
+}
+console.log(filter(language, language => language.direction == "ltr"));
+//!преоборазование и отображение map
+function map(array,transform){
+  let mapped = [];
+  for (let element of array){
+    let elem = transform(element)
+    mapped.push(elem)
+  }
+}
+let ltrLanguage = filter(language, language => language.direction == "ltr");
+console.log(map(ltrLanguage, s => s.direction));

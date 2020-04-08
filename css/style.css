@@ -1,8 +1,104 @@
 body {
-  font-size: 30px;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+
+  background-color:#833737;
+  background-image:url("/img/fon.jpg");
+  background-repeat: ;
 }
 
-ul{
-  list-style-type: none;
-  margin: 10px;
+.main-menu a{
+  text-decoration: none;
+  color:#ffffff;
 }
+
+
+.main-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin:0;
+  padding:0;
+  width: 100%;
+
+  list-style-type: none;
+  background-color: rgba(180, 195, 197, 0.2);
+}
+
+
+footer{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+}
+
+.social{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgb(206, 198, 198);
+}
+
+.authors{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgb(206, 198, 198);
+}
+
+.contacts{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgb(206, 198, 198);
+}
+
+.location{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgb(206, 198, 198);
+}
+
+
+
+
+
+
+
+
+
+.cat{
+  border:10px solid rgb(20, 87, 194);
+  border-radius: 30%;
+  background-color: rgba(253, 231, 26, 0.609);
+}
+
+.flextest{
+  height: 2000px;
+  border:5px solid orange ;
+  display: flex;
+  flex-direction: row; /*направление построения объектов */
+  justify-content: space-between; /*распределение объектов по главной оси*/
+  align-items: flex-end; /*распределение объектов по поперечной оси c возможностью управление каждым элементом */
+  align-content: stretch; /*распределение объектов по поперечной оси */
+  flex-wrap:wrap;  /*отвечает за перенос на другую строку */
+}
+
+.cat10{
+  align-self:flex-end; /*собственное выравнивание элеметна по поперечной оси*/
+  margin:auto;
+} 
+
+.cat2{
+  align-self:flex-end; /*собственное выравнивание элеметна по поперечной оси*/
+  order: -1;
+} 
+
