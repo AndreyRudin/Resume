@@ -4,7 +4,7 @@ body {
 
   background-color:#833737;
   background-image:url("/img/fon.jpg");
-  background-repeat: ;
+  background-repeat: no-repeat;
 }
 
 .main-menu a{
